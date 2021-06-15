@@ -1,6 +1,9 @@
 <template>
   <div class="sidebar-div p-5">
-    <h1>Profile Pic</h1>
+    <img class="profile-img img-fluid mb-5" :src="account.picture" alt="">
+    <h1 class="text-primary text-break">
+      {{ account.name }}
+    </h1>
     <router-link :to="{ name: 'Home' }" class="nav-link">
       Home
     </router-link>
@@ -16,15 +19,16 @@
     </button>
     <div v-else>
       <router-link :to="{ name: 'Account' }">
-        <div class="list-group-item list-group-item-action hoverable">
+        <div class="hoverable">
           Account
         </div>
       </router-link>
       <div
-        class="list-group-item list-group-item-action hoverable"
+        class="nav-link text-primary"
         @click="logout"
+        role="button"
       >
-        logout
+        Logout
       </div>
     </div>
   </div>
@@ -42,6 +46,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
@@ -55,7 +60,21 @@ export default {
 
 <style scoped>
 .sidebar-div {
-  background: blue;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #1f1f2296;
+  height: 100vh;
+  font-size: 100%;
+  color: black;
+}
+
+h1 {
+  font-size: 100%;
+}
+
+.profile-img {
+  border-radius: 50%;
 }
 
 </style>

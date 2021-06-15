@@ -2,7 +2,7 @@
   <div class="container-fluid flex-grow-1 pt-5 home">
     <div class="row d-flex justify-content-center mt-5">
       <div class="col-4 title-card p-4 shadow">
-        <img class="img img-fluid" src="../assets/img/kanban-logo.png" alt="CodeWorks Logo">
+        <img class="img img-fluid" src="../assets/img/kanban-can2.png" alt="CodeWorks Logo">
         <hr>
         <h1 class="page-title">
           Kannedit
@@ -20,9 +20,9 @@
       </div>
       <div class="d-flex justify-content-center flex-grow-1 text-center mt-5" v-else>
         <div class="col-lg-1">
-          <router-link :to="{ name: 'Account' }">
+          <router-link :to="{ name: 'Boards', params:{id: account.id} }">
             <div class="landing-button">
-              Account
+              Boards
             </div>
           </router-link>
         </div>
@@ -43,20 +43,18 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
-import { useRouter } from 'vue-router'
 export default {
   name: 'Home',
   setup() {
-    const router = useRouter()
     const state = reactive({
       dropOpen: false
     })
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         await AuthService.loginWithPopup()
-        router.push({ name: 'Account' })
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
@@ -114,7 +112,7 @@ hr {
 .title-card {
   background-color: #00000018;
   border-radius: 10px;
-  color: #C6D7F5
+  color: #C6D7F5;
 }
 
 </style>

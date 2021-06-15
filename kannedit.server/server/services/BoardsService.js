@@ -12,8 +12,8 @@ class BoardsService {
   }
 
   async deleteBoard(id) {
-    await dbContext.Board.findByIdAndRemove(id)
-    return 'deleted ya bored'
+    const board = await dbContext.Board.findByIdAndRemove(id)
+    return board
   }
 }
 
