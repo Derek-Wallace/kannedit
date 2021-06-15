@@ -1,21 +1,11 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <Sidebar />
-    <router-view />
-  </main>
-  <footer>
-  </footer>
+  <router-view />
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
-import Sidebar from './components/Sidebar.vue'
 export default {
-  components: { Sidebar },
   name: 'App',
   setup() {
     return {
