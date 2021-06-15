@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-div p-5">
+  <div class="sidebar-div p-5 text-center">
     <img class="profile-img img-fluid mb-5" :src="account.picture" alt="">
     <h1 class="text-primary text-break">
       {{ account.name }}

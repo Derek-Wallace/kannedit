@@ -37,7 +37,7 @@ export default {
         }
       },
       routeToBoard(bid) {
-        route.push({ path: 'board/' + bid })
+        route.push({ path: '/board/' + bid })
       }
     }
   }
