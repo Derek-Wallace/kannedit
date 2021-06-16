@@ -1,8 +1,13 @@
 import { dbContext } from '../db/DbContext'
 
 class TasksService {
-  async getTasksFromListId(lid) {
-    const tasks = await dbContext.Tasks.find({ listId: lid })
+  async updateTask(body) {
+    const task = await dbContext.Tasks.findByIdAndUpdate(body.id, body)
+    return task
+  }
+
+  async getTasksFromBoardId(bid) {
+    const tasks = await dbContext.Tasks.find({ boardId: bid })
     return tasks
   }
 

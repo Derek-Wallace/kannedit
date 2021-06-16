@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .home{
   font-family: 'Secular One', sans-serif;
   text-align: center;

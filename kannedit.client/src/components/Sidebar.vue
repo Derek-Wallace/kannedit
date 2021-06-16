@@ -7,8 +7,8 @@
     <router-link :to="{ name: 'Home' }" class="nav-link">
       Home
     </router-link>
-    <router-link :to="{ name: 'About' }" class="nav-link">
-      About
+    <router-link :to="{ name: 'Boards', params: {id: account.id} }" class="nav-link">
+      Boards
     </router-link>
     <button
       class="btn btn-outline-primary text-uppercase"

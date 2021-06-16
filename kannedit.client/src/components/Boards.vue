@@ -44,9 +44,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .words{
     background-color: #C6D7F5;
+    border-radius: 5px;
     border-radius: 10px;
     box-shadow: 1px 1px 10px #000000 inset;
     height: 17vh;

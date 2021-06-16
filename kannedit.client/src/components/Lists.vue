@@ -1,41 +1,71 @@
 <template>
-  <div v-for="list in lists" :key="list.id" :list="list" class="col-3 p-4">
-    <div class="list-card">
-      <div class="list-card-header">
-        <h2>{{ list.title }}</h2>
+  <div class="col-3 p-4">
+    <div class="list-card"
+         @drop="drop($event, list.id)"
+         @dragover.prevent
+         @dragenter.prevent
+    >
+      <div class="list-card-header d-flex justify-content-end">
+        <h2 class="m-auto">
+          {{ list.title }}
+        </h2>
+        <h3 role="button"
+            class="mdi mdi-trash-can"
+            @click="deleteList(list.id)"
+        ></h3>
       </div>
       <div class="list-card-body text-left">
-        <Tasks v-for="task in tasks" :key="task.id" :task="task" />
+        <div>
+          <Tasks v-for="task in tasks" :key="task.id" :task="task" :list="list" />
+        </div>
       </div>
-      <input type="text" class="task-input border-left-0 border-right-0 border-top-0 bg-transparent" placeholder="Add Task">
-      <h3 role="button" class="mdi mdi-comment-plus add-task"></h3>
+      <form @submit.prevent="addTask(event, list.id)">
+        <input type="text" v-model="state.newTask.body" class="task-input border-left-0 border-right-0 border-top-0 bg-transparent" placeholder="Add Task">
+        <button type="submit" class="form-btn">
+          <h4 class="mdi mdi-comment-plus add-task"></h4>
+        </button>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, watchEffect } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { listsService } from '../services/ListsService'
+import { tasksService } from '../services/TasksService'
 import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
 export default {
+  props: { list: { type: Object, required: true } },
   setup() {
-    const route = useRoute()
-    watchEffect(async() => {
-      try {
-        if (route.params.id) {
-          await listsService.getListsByBoard(route.params.id)
-        }
-      } catch (error) {
-        Notification.toast(error, 'error')
-      }
+    const state = reactive({
+      newTask: {}
     })
+    const route = useRoute()
     return {
-      lists: computed(() => AppState.lists),
+      state,
+      tasks: computed(() => AppState.tasks),
+      async drop(event, listId) {
+        const taskId = event.dataTransfer.getData('taskId')
+        // eslint-disable-next-line eqeqeq
+        const task = AppState.tasks.find(t => t.id == taskId)
+        task.listId = listId
+        await tasksService.moveTask(task)
+      },
+      async addTask(event, lid) {
+        try {
+          await tasksService.addTask(route.params.id, lid, state.newTask)
+          state.newTask = {}
+        } catch (error) {
+          Notification.toast(error, 'error')
+        }
+      },
       async deleteList(lid) {
         try {
-          await listsService.deleteList(lid)
+          if (await Notification.confirmAction()) {
+            await listsService.deleteList(lid)
+          }
         } catch (error) {
           Notification.toast(error, 'error')
         }
@@ -49,7 +79,8 @@ export default {
 .list-card {
   background-color: #C6D7F5;
   border-radius: 0px 0px 10px 10px;
-  height: 200px;
+  padding-bottom: 10px;
+  width: 300px;
 }
 
 .list-card-header{
@@ -60,16 +91,8 @@ export default {
   padding-bottom: 20px;
   margin-bottom: 30px;
 }
-
-.add-task {
-  position: absolute;
-  bottom: 25px;
-  right: 40px;
-}
-.task-input{
-  position: absolute;
-  width: 60%;
-  bottom: 15%;
-  right: 25%;
+.form-btn{
+  background: none;
+  border: none;
 }
 </style>
