@@ -20,6 +20,12 @@ class TasksService {
   async moveTask(task) {
     await api.put('api/tasks/' + task.id, task)
   }
+
+  async editTask(tid, taskUpdate) {
+    const res = await api.put('api/tasks/' + tid, taskUpdate)
+    AppState.tasks = AppState.tasks.filter(t => t.id !== tid)
+    AppState.tasks = [...AppState.tasks, res.data]
+  }
 }
 
 export const tasksService = new TasksService()

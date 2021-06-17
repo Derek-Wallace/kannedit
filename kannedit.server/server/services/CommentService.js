@@ -8,11 +8,12 @@ class CommentService {
 
   async createComment(body) {
     const comment = await dbContext.Comments.create(body)
+    await comment.populate('creator', 'name picture').execPopulate()
     return comment
   }
 
   async updateComment(id, body) {
-    const comment = await dbContext.Comments.findByIdAndUpdate(id, body)
+    const comment = await dbContext.Comments.findByIdAndUpdate(id, body, { new: true, runValidators: true })
     return comment
   }
 

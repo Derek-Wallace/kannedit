@@ -2,7 +2,7 @@ import { dbContext } from '../db/DbContext'
 
 class TasksService {
   async updateTask(body) {
-    const task = await dbContext.Tasks.findByIdAndUpdate(body.id, body)
+    const task = await dbContext.Tasks.findByIdAndUpdate(body.id, body, { new: true, runValidators: true })
     return task
   }
 

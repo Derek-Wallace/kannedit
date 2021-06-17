@@ -3,18 +3,26 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title text-break" id="exampleModalLabel">
+          <h3 class="modal-title text-break" id="exampleModalLabel" v-if="state.taskUpdateForm === false">
             {{ task.body }}
           </h3>
+          <input type="text" class="border-right-0 border-left-0 border-top-0 bg-transparent" v-model="state.taskUpdate.body" v-if="state.taskUpdateForm === true">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <p>
-            Description here
+        <div class="modal-body d-flex justify-content-between" v-if="state.taskUpdateForm === false">
+          <p v-if="task.description">
+            {{ task.description }}
           </p>
+          <i role="button" @click="showForm" title="Edit Description" class="mdi mdi-pencil-plus-outline"></i>
         </div>
+        <div v-if="state.taskUpdateForm === true" class="modal-body">
+          <textarea name="Task Description" v-model="state.taskUpdate.description" cols="49" rows="10"></textarea>
+        </div>
+        <button v-if="state.taskUpdateForm === true" class="btn btn-success" @click="editTask(task.id)">
+          Accept Edit
+        </button>
         <div class="modal-body border-top">
           <h4 class="border-bottom pb-1">
             Comments:
@@ -40,12 +48,15 @@ import { commentService } from '../services/CommentService'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
+import { tasksService } from '../services/TasksService'
 export default {
   props: { task: { type: Object, required: true } },
-  setup() {
+  setup(props) {
     const route = useRoute()
     const state = reactive({
-      newComment: {}
+      newComment: {},
+      taskUpdate: { description: props.task.description, body: props.task.body, id: props.task.id, boardId: props.task.boardId, listId: props.task.listId },
+      taskUpdateForm: false
     })
     return {
       state,
@@ -57,6 +68,18 @@ export default {
         } catch (error) {
           Notification.toast(error, 'error')
         }
+      },
+      async editTask(tid) {
+        try {
+          await tasksService.editTask(tid, state.taskUpdate)
+          state.taskUpdate = { description: props.task.description, body: props.task.body, id: props.task.id, boardId: props.task.boardId, listId: props.task.listId }
+          state.taskUpdateForm = false
+        } catch (error) {
+          Notification.toast(error, 'error')
+        }
+      },
+      showForm() {
+        state.taskUpdateForm = true
       }
     }
   }
