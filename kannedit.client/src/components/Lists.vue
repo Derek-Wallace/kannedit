@@ -11,6 +11,7 @@
           {{ list.title }}
         </h2>
         <h3
+          v-if="list.creatorId === account.id"
           role="button"
           title="Delete List"
           class="mdi mdi-trash-can"
@@ -39,7 +40,7 @@
           placeholder="Add Task"
         />
         <button type="submit" class="form-btn" title="Add a Task">
-          <h4 class="mdi mdi-comment-plus add-task"></h4>
+          <i class="icon-size mdi mdi-comment-plus add-task"></i>
         </button>
       </form>
     </div>
@@ -65,6 +66,7 @@ export default {
     return {
       state,
       tasks: computed(() => AppState.tasks),
+      account: computed(() => AppState.account),
       async drop(event, listId) {
         const taskId = event.dataTransfer.getData('taskId')
         // eslint-disable-next-line eqeqeq
@@ -115,5 +117,8 @@ export default {
 .form-btn {
   background: none;
   border: none;
+}
+.icon-size {
+  font-size: 1.5rem;
 }
 </style>

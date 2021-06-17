@@ -4,7 +4,7 @@
       <p class="text-break">
         {{ task.body }}
       </p>
-      <i role="button" @click.stop="deleteTask(task.id)" class="mdi mdi-trash-can" title="Delete Task"></i>
+      <i v-if="task.creatorId === account.id" role="button" @click.stop="deleteTask(task.id)" class="mdi mdi-trash-can" title="Delete Task"></i>
     </div>
     <TaskModal :task="task" />
   </div>
@@ -24,6 +24,7 @@ export default {
     return {
       tasks: computed(() => AppState.tasks),
       lists: computed(() => AppState.lists),
+      account: computed(() => AppState.account),
       drag(event, task) {
         event.dataTransfer.drogEffect = 'move'
         event.dataTransfer.effectAllowed = 'move'

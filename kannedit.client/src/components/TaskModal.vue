@@ -21,7 +21,7 @@
           <p v-if="task.description">
             {{ task.description }}
           </p>
-          <i role="button" @click="showForm" title="Edit Description" class="mdi mdi-pencil-plus-outline"></i>
+          <i role="button" v-if="task.creatorId === account.id" @click="showForm" title="Edit Description" class="mdi mdi-pencil-plus-outline"></i>
         </div>
         <div v-if="state.taskUpdateForm === true" class="modal-body">
           <textarea name="Task Description" v-model="state.taskUpdate.description" cols="49" rows="10"></textarea>
@@ -67,6 +67,7 @@ export default {
     return {
       state,
       comments: computed(() => AppState.comments),
+      account: computed(() => AppState.account),
       async createComment(tid) {
         try {
           await commentService.createComment(route.params.id, tid, state.newComment)

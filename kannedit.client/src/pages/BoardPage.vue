@@ -12,9 +12,8 @@
     <!-- <div v-if="account.id" v-masonry="containerId" class="row d-flex align-content-start board-content flex-grow-1 flex-wrap"> -->
     <div
       v-if="account.id"
-      v-masonry="containerList"
+      v-masonry
       class="row board-content flex-grow-1"
-      id="containerList"
       item-selector=".item"
     >
       <Lists
@@ -83,6 +82,7 @@ export default {
   bottom: 50px;
   right: 50px;
   padding: 10px;
+  z-index: 10;
 }
 .board-content {
   margin-left: 250px;

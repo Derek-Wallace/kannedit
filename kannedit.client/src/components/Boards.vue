@@ -1,10 +1,10 @@
 <template>
   <div role="button" @click="routeToBoard(b.id)" v-for="b in boards" :key="b.id" class="col-lg-2 words py-5 px-2 m-3 mx-1 text-center">
-    <h3 class="text-break">
+    <p class="text-break icon-size">
       {{ b.title }}
-    </h3>
-    <div class="delete-icon">
-      <h3 @click.stop="deleteBoard(b.id)" class="mdi mdi-trash-can" title="Delete Board"></h3>
+    </p>
+    <div v-if="b.creatorId === account.id" class="delete-icon">
+      <i @click.stop="deleteBoard(b.id)" class="mdi mdi-trash-can icon-size" title="Delete Board"></i>
     </div>
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
     })
     return {
       boards: computed(() => AppState.boards),
+      account: computed(() => AppState.account),
       async deleteBoard(bid) {
         try {
           if (await Notification.confirmAction()) {
@@ -56,5 +57,8 @@ export default {
   position: absolute;
   right: 5px;
   bottom: 0;
+}
+.icon-size {
+  font-size: 2rem;
 }
 </style>
