@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const ALWAYS = 'always'
 const NEVER = 'never'
 const ERROR = 2

@@ -8,13 +8,11 @@ class ListsService {
   }
 
   async createList(bid, data) {
-    const res = await api.post('api/lists/' + bid, data)
-    AppState.lists = [...AppState.lists, res.data]
+    await api.post('api/lists/' + bid, data)
   }
 
   async deleteList(lid) {
     await api.delete('api/lists/' + lid)
-    AppState.lists = AppState.lists.filter(l => l.id !== lid)
   }
 }
 

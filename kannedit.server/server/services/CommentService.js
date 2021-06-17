@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { socketProvider } from '../SocketProvider'
 
 class CommentService {
   async getCommentsByTask(bid) {
@@ -9,6 +10,7 @@ class CommentService {
   async createComment(body) {
     const comment = await dbContext.Comments.create(body)
     await comment.populate('creator', 'name picture').execPopulate()
+    socketProvider.io.emit('createComment', comment)
     return comment
   }
 
@@ -18,7 +20,9 @@ class CommentService {
   }
 
   async deleteComment(id) {
-    await dbContext.Comments.findByIdAndRemove(id)
+    const comment = await dbContext.Comments.findByIdAndRemove(id)
+    socketProvider.io.emit('deleteComment', comment)
+    return comment
   }
 }
 
