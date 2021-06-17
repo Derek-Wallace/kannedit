@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar nbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img
@@ -126,5 +126,10 @@ a:hover {
 }
 .profile-img {
   border-radius: 50%;
+}
+@media only screen and (min-width: 1000px) {
+  .nbar{
+    display: none;
+  }
 }
 </style>

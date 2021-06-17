@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="container-fluid d-flex flex-grow-1 home">
     <Sidebar />
     <div v-if="account.id" class="row d-flex align-content-start board-content flex-grow-1 flex-wrap">

@@ -7,7 +7,13 @@
             {{ task.body }}
           </h3>
           <input type="text" class="border-right-0 border-left-0 border-top-0 bg-transparent" v-model="state.taskUpdate.body" v-if="state.taskUpdateForm === true">
-          <button type="button" class="close" title="Close Task" data-dismiss="modal" aria-label="Close">
+          <button type="button"
+                  class="close"
+                  title="Close Task"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  @click="hideForm"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -80,6 +86,9 @@ export default {
       },
       showForm() {
         state.taskUpdateForm = true
+      },
+      hideForm() {
+        state.taskUpdateForm = false
       }
     }
   }

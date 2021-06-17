@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="container-fluid home flex-grow-1 pt-5">
     <div class="about text-center">
       <h1>Welcome {{ account.name }}</h1>

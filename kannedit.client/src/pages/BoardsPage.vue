@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="container-fluid home flex-grow-1 d-flex">
     <Sidebar />
     <div class="row d-flex align-content-start board-content flex-grow-1">

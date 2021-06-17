@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3 p-4">
+  <div class="col-xl-3 p-4">
     <div class="list-card"
          @drop="drop($event, list.id)"
          @dragover.prevent

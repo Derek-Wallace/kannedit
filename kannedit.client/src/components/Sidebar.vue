@@ -77,4 +77,10 @@ h1 {
   border-radius: 50%;
 }
 
+@media only screen and (max-width: 1000px) {
+  .sidebar-div{
+    display: none;
+  }
+}
+
 </style>
