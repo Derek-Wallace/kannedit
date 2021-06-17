@@ -1,6 +1,7 @@
 import { AppState } from '../AppState'
 import { globals } from '../main'
 import { SocketHandler } from '../utils/SocketHandler'
+import $ from 'jquery'
 
 class SocketService extends SocketHandler {
   constructor() {
@@ -18,6 +19,7 @@ class SocketService extends SocketHandler {
   updateTask(task) {
     const i = AppState.tasks.findIndex(t => t.id === task.id)
     AppState.tasks.splice(i, 1, task)
+    $('.modal-backdrop').hide()
   }
 
   createTask(task) {

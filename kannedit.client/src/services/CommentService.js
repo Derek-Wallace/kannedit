@@ -1,3 +1,4 @@
+import { AppState } from '../AppState'
 import { api } from './AxiosService'
 
 class CommentService {
@@ -6,7 +7,8 @@ class CommentService {
   }
 
   async getComments(bid) {
-    await api.get('api/comments/' + bid)
+    const res = await api.get('api/comments/' + bid)
+    AppState.comments = res.data
   }
 
   async deleteComment(cid) {
