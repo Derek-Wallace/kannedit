@@ -1,4 +1,11 @@
 <template>
+  <h1
+    data-toggle="modal"
+    data-target="#list-form"
+    class="mx-1 my-1 blue mdi mdi-view-grid-plus shadow fab"
+    role="button"
+    title="Add List"
+  ></h1>
   <Navbar />
   <div class="container-fluid d-flex flex-grow-1 home">
     <Sidebar />
@@ -17,15 +24,6 @@
         :list="list"
         class="item"
       />
-      <div v-masonry-tile class="col-xl-1 item">
-        <h1
-          data-toggle="modal"
-          data-target="#list-form"
-          class="mx-1 my-1 blue mdi mdi-view-grid-plus shadow"
-          role="button"
-          title="Add List"
-        ></h1>
-      </div>
     </div>
     <ListModal />
   </div>
@@ -79,6 +77,12 @@ export default {
   -webkit-text-stroke: 2px rgb(0, 0, 0);
   background-color: rgba(255, 255, 255, 0.253);
   border-radius: 5px;
+}
+.fab {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  padding: 10px;
 }
 .board-content {
   margin-left: 250px;

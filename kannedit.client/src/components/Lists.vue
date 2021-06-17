@@ -71,6 +71,7 @@ export default {
         const task = AppState.tasks.find(t => t.id == taskId)
         task.listId = listId
         await tasksService.moveTask(task)
+        globals.$redrawVueMasonry()
       },
       async addTask(event, lid) {
         try {
