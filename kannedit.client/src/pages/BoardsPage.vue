@@ -4,7 +4,7 @@
     <div class="row d-flex align-content-start board-content flex-grow-1">
       <Boards v-if="account.id" />
       <div class="col-lg-1 my-auto">
-        <h1 data-toggle="modal" data-target="#board-form" class="mx-1 my-1 blue mdi mdi-layers-plus shadow" role="button" title="Add Board"></h1>
+        <h1 data-toggle="modal" data-target="#board-form" class="mx-1 my-1 blue mdi mdi-layers-plus shadow" role="button" title="Add a Board"></h1>
       </div>
     </div>
     <BoardModal />

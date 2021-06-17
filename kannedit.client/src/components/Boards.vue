@@ -4,7 +4,7 @@
       {{ b.title }}
     </h3>
     <div class="delete-icon">
-      <h3 @click.stop="deleteBoard(b.id)" class="mdi mdi-trash-can"></h3>
+      <h3 @click.stop="deleteBoard(b.id)" class="mdi mdi-trash-can" title="Delete Board"></h3>
     </div>
   </div>
 </template>

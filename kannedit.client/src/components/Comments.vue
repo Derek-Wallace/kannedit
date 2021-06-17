@@ -1,7 +1,7 @@
 <template>
   <div v-if="comment.taskId === task.id" class="d-flex justify-content-between">
-    <p>{{ comment.body }}</p>
-    <i role="button" @click="deleteComment(comment.id)" class="mdi mdi-trash-can-outline"></i>
+    <p> <img :src="comment.creator.picture" class="rounded-circle pr-1" height="50">{{ comment.body }}</p>
+    <i role="button" @click="deleteComment(comment.id)" title="Delete Comment" class="mdi mdi-trash-can-outline"></i>
   </div>
 </template>
 

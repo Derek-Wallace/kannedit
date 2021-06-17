@@ -10,6 +10,7 @@
           {{ list.title }}
         </h2>
         <h3 role="button"
+            title="Delete List"
             class="mdi mdi-trash-can"
             @click="deleteList(list.id)"
         ></h3>
@@ -21,7 +22,7 @@
       </div>
       <form @submit.prevent="addTask(event, list.id)">
         <input type="text" v-model="state.newTask.body" class="task-input border-left-0 border-right-0 border-top-0 bg-transparent" placeholder="Add Task">
-        <button type="submit" class="form-btn">
+        <button type="submit" class="form-btn" title="Add a Task">
           <h4 class="mdi mdi-comment-plus add-task"></h4>
         </button>
       </form>

@@ -7,7 +7,7 @@
             {{ task.body }}
           </h3>
           <input type="text" class="border-right-0 border-left-0 border-top-0 bg-transparent" v-model="state.taskUpdate.body" v-if="state.taskUpdateForm === true">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" title="Close Task" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -31,7 +31,7 @@
           <form @submit.prevent="createComment(task.id)">
             <label for="comment" class="sr-only">Comment</label>
             <input type="text" v-model="state.newComment.body" class="border-top-0 border-left-0 border-right-0 bg-transparent w-75 mt-3" placeholder="Comment">
-            <button type="submit" class="form-btn">
+            <button type="submit" class="form-btn" title="Add a comment">
               <h5 class="mdi mdi-message-plus"></h5>
             </button>
           </form>

@@ -4,7 +4,7 @@
       <p class="text-break">
         {{ task.body }}
       </p>
-      <i role="button" @click.stop="deleteTask(task.id)" class="mdi mdi-trash-can"></i>
+      <i role="button" @click.stop="deleteTask(task.id)" class="mdi mdi-trash-can" title="Delete Task"></i>
     </div>
     <TaskModal :task="task" />
   </div>
